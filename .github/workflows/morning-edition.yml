@@ -1,0 +1,108 @@
+name: Morning Edition
+
+on:
+  schedule:
+    - cron: '0 12 * * *'  # 7am Eastern = 12pm UTC
+  workflow_dispatch:        # lets you run it manually too
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Generate magazine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          mkdir -p magazines
+          python generate.py
+
+      - name: Send email
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python - <<'EOF'
+          import os, requests, datetime
+
+          date = datetime.date.today().strftime("%Y-%m-%d")
+          display = datetime.date.today().strftime("%B %d, %Y")
+          repo = os.environ["GITHUB_REPOSITORY"]
+          owner = repo.split("/")[0]
+          url = f"https://{owner}.github.io/morning-edition/magazines/{date}.html"
+          recipients = [e.strip() for e in os.environ["EMAIL_RECIPIENTS"].split(",")]
+
+          html = f"""
+          <div style="font-family:Georgia,serif;max-width:480px;margin:0 auto;padding:2rem">
+            <div style="font-size:2rem;font-weight:900;margin-bottom:.25rem">Morning Edition</div>
+            <div style="font-size:.85rem;color:#888;margin-bottom:2rem;text-transform:uppercase;letter-spacing:.1em">{display}</div>
+            <p style="font-size:1.1rem;line-height:1.6;margin-bottom:2rem">
+              Your daily adult beverage intelligence briefing is ready.
+            </p>
+            <a href="{url}" style="background:#0A0A0A;color:#C8A96E;padding:1rem 2rem;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:.15em;text-transform:uppercase;display:inline-block">
+              READ TODAY'S EDITION &rarr;
+            </a>
+            <p style="font-size:.75rem;color:#aaa;margin-top:2rem">
+              Brewbound · Craft Beer &amp; Brewing · BevNET
+            </p>
+          </div>
+          """
+
+          resp = requests.post(
+            "https://api.resend.com/emails",
+            headers={"Authorization": f"Bearer {os.environ['RESEND_API_KEY']}",
+                     "Content-Type": "application/json"},
+            json={
+              "from": "Morning Edition <onboarding@resend.dev>",
+              "to": recipients,
+              "subject": f"Morning Edition — {display}",
+              "html": html
+            }
+          )
+          print(resp.status_code, resp.text)
+          EOF
+
+      - name: Commit magazine
+        run: |
+          git config user.name "Morning Edition Bot"
+          git config user.email "bot@morning-edition"
+          git add magazines/
+          git diff --staged --quiet || git commit -m "Morning Edition $(date +%Y-%m-%d)"
+          git push
+
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
