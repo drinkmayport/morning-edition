@@ -75,7 +75,7 @@ system = (
         "Use each layout exactly once in that order for ranks 1-10."
     )
 
-    user = f"Today is {today}. Search for the latest beverage industry stories and curate the top 10."
+user = f"Today is {today}. Search for the latest beverage industry stories and curate the top 10."
 
     print("  Calling Claude with web_search tool…")
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
