@@ -50,12 +50,12 @@ LAYOUT_CSS = {
 def fetch_and_curate() -> list:
     today = datetime.now().strftime("%B %d, %Y")
 
-system = (
+    system = (
         "You are the editor of 'Morning Edition,' a daily intelligence briefing for craft beverage startup founders. "
         "The reader runs Mayport Beer Company, an adult beverage startup in Jacksonville, Florida. "
         "He cares about: beer industry moves, cannabis-infused beverages, spirits, RTDs, openings, closings, acquisitions, "
         "distribution deals, sales data, weird fermentation/ingredients science, and actionable startup intel. "
-        "Flag stories that are especially relevant to a small startup brewery in Florida or the Southeast US. "
+        "Flag stories especially relevant to a small startup brewery in Florida or the Southeast US. "
         "Skip wine entirely. Skip celebrity fluff. Skip politics.\n\n"
         "TASK: Use web_search to find today's top stories from Brewbound, Craft Beer & Brewing Magazine (beerandbrewing.com), "
         "and BevNET. Search at least these queries:\n"
@@ -75,7 +75,7 @@ system = (
         "Use each layout exactly once in that order for ranks 1-10."
     )
 
-user = f"Today is {today}. Search for the latest beverage industry stories and curate the top 10."
+    user = f"Today is {today}. Search for the latest beverage industry stories and curate the top 10."
 
     print("  Calling Claude with web_search tool…")
     api_key = os.environ.get("ANTHROPIC_API_KEY", "")
@@ -87,7 +87,7 @@ user = f"Today is {today}. Search for the latest beverage industry stories and c
         headers={"Content-Type": "application/json", "x-api-key": api_key,
                  "anthropic-version": "2023-06-01"},
         json={
-            "model": "claude-sonnet-4-6",
+            "model": "claude-sonnet-4-20250514",
             "max_tokens": 4000,
             "system": system,
             "tools": [{"type": "web_search_20250305", "name": "web_search"}],
