@@ -67,7 +67,7 @@ jobs:
             headers={"Authorization": f"Bearer {os.environ['RESEND_API_KEY']}",
                      "Content-Type": "application/json"},
             json={
-              "from": "Morning Edition <onboarding@resend.dev>",
+              "from": "Mayport Morning Edition <rick@drinkmayport.com>",
               "to": recipients,
               "subject": f"Morning Edition — {display}",
               "html": html
