@@ -87,7 +87,7 @@ def fetch_and_curate() -> list:
         headers={"Content-Type": "application/json", "x-api-key": api_key,
                  "anthropic-version": "2023-06-01"},
         json={
-            "model": "claude-sonnet-4-20250514",
+            "model": "claude-sonnet-4-6",
             "max_tokens": 4000,
             "system": system,
             "tools": [{"type": "web_search_20250305", "name": "web_search"}],
