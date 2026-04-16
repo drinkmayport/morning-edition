@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Morning Edition &mdash; Thursday, April 16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--fraunces:'Fraunces',Georgia,serif;--inter:'Inter',system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--inter);background:#050505;color:#f0f0f0;overflow-x:hidden}
+.masthead{background:#050505;border-bottom:3px solid #C8A96E;padding:3rem 5vw 2rem;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.masthead-title{font-family:var(--fraunces);font-size:clamp(3rem,8vw,7rem);font-weight:900;line-height:.9;color:#F5F0E8;letter-spacing:-.03em}
+.masthead-title span{color:#C8A96E;font-style:italic}
+.masthead-date{font-size:clamp(.9rem,1.5vw,1.1rem);font-weight:600;color:#C8A96E;text-transform:uppercase;letter-spacing:.15em}
+.masthead-tagline{font-family:var(--fraunces);font-size:clamp(.85rem,1.3vw,1rem);font-style:italic;color:rgba(245,240,232,.5);margin-top:.3rem}
+.story-count{font-size:.75rem;color:rgba(200,169,110,.6);margin-top:.5rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase}
+.toc{background:#0A0A0A;padding:2.5rem 5vw;border-bottom:1px solid #222}
+.toc-label{font-size:.7rem;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:#C8A96E;margin-bottom:1.5rem}
+.toc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.4rem}
+.toc-item{display:flex;align-items:baseline;gap:.75rem;padding:.55rem 0;border-bottom:1px solid #1a1a1a;text-decoration:none;transition:color .2s}
+.toc-item:hover{color:#C8A96E}
+.toc-num{font-family:var(--fraunces);font-size:1.1rem;font-weight:700;color:#C8A96E;min-width:2rem;font-style:italic}
+.toc-hed{font-size:.85rem;color:rgba(245,240,232,.7);line-height:1.3}
+.toc-flag{color:#FF6B35;font-size:.7rem;margin-left:.4rem}
+.spread{position:relative;min-height:100vh;padding:5vw;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.spread-inner{position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%}
+.meta-row{display:flex;align-items:center;gap:.75rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.source-tag{font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.5);border:1px solid rgba(245,240,232,.2);padding:.25rem .6rem;border-radius:2px}
+.source-tag.dark{color:rgba(0,0,0,.5);border-color:rgba(0,0,0,.2)}
+.cat-tag{font-size:.65rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .7rem;border-radius:2px}
+.headline{font-family:var(--fraunces);font-size:clamp(2.2rem,5vw,4.5rem);font-weight:800;line-height:1.05;letter-spacing:-.02em;margin-bottom:1.5rem;max-width:900px}
+.deck{font-size:clamp(1rem,1.8vw,1.25rem);line-height:1.65;max-width:680px;opacity:.8;margin-bottom:2rem}
+.read-link{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:.2rem;transition:opacity .2s;margin-top:.5rem}
+.read-link:hover{opacity:.7}
+.read-link.dark{color:var(--accent)}
+.orig-title{font-family:var(--fraunces);font-style:italic;font-size:.85rem;opacity:.35;margin-top:1.5rem;max-width:600px}
+.flag-banner{display:inline-flex;align-items:center;gap:.6rem;background:#FF6B35;color:#fff;padding:.6rem 1.2rem;border-radius:3px;margin-bottom:1.5rem;max-width:90%}
+.flag-icon{font-size:1rem}
+.flag-text{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1.3}
+.hero-layout{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:center}
+.hero-num{font-family:var(--fraunces);font-size:clamp(8rem,22vw,20rem);font-weight:900;color:rgba(200,169,110,.1);line-height:.85;font-style:italic;user-select:none}
+@media(max-width:700px){.hero-layout{grid-template-columns:1fr}.hero-num{display:none}}
+.midnight-layout{position:relative}
+.rank-pill{font-family:var(--fraunces);font-size:1rem;font-style:italic;background:rgba(79,195,247,.15);border:1px solid rgba(79,195,247,.3);color:#4FC3F7;display:inline-block;padding:.4rem 1rem;border-radius:50px;margin-bottom:2rem}
+.watermark{position:absolute;right:-2vw;top:50%;transform:translateY(-50%);font-family:var(--fraunces);font-size:clamp(10rem,25vw,22rem);font-weight:900;color:rgba(79,195,247,.04);user-select:none;pointer-events:none;line-height:1}
+.alert-layout{display:grid;grid-template-columns:auto 1fr;gap:3rem;align-items:start}
+.alert-stamp{font-family:var(--fraunces);font-size:clamp(5rem,14vw,12rem);font-weight:900;color:#E53935;line-height:.9;font-style:italic;border:6px solid #E53935;padding:.5rem 1rem;transform:rotate(-3deg);min-width:120px;text-align:center}
+@media(max-width:700px){.alert-layout{grid-template-columns:1fr}.alert-stamp{font-size:5rem}}
+.terminal-layout{font-family:'Courier New',monospace!important}
+.terminal-layout .headline{font-family:'Courier New',monospace!important;color:#39FF14;font-weight:400;font-size:clamp(1.8rem,4vw,3.5rem)}
+.terminal-layout .deck{font-family:'Courier New',monospace!important;color:rgba(57,255,20,.7);font-size:1.05rem}
+.term-header{font-size:.7rem;color:rgba(57,255,20,.5);margin-bottom:2rem;letter-spacing:.05em;word-break:break-all;font-family:'Courier New',monospace}
+.term-prompt{font-size:.9rem;color:rgba(57,255,20,.6);margin-bottom:.5rem;margin-top:1rem;font-family:'Courier New',monospace}
+.terminal-layout .flag-banner{background:rgba(57,255,20,.15);border:1px solid #39FF14;color:#39FF14}
+.academic-layout .dropcap-num{float:left;font-family:var(--fraunces);font-size:clamp(7rem,18vw,16rem);font-weight:900;line-height:.8;color:rgba(139,37,0,.1);margin-right:1rem;margin-top:.1rem;font-style:italic}
+.academic-layout .headline{font-style:italic}
+.academic-rule{height:2px;background:#8B2500;max-width:200px;margin:1.5rem 0;clear:both}
+.bigstat-layout{text-align:center}
+.stat-num{font-family:var(--fraunces);font-size:clamp(8rem,28vw,24rem);font-weight:900;font-style:italic;color:rgba(191,95,255,.15);line-height:.85;margin-bottom:1rem}
+.bigstat-layout .headline,.bigstat-layout .deck{margin-left:auto;margin-right:auto;text-align:center}
+.bigstat-layout .meta-row{justify-content:center}
+.dispatch-num{font-family:var(--fraunces);font-size:clamp(3rem,8vw,6rem);font-weight:900;color:#B8860B;font-style:italic;margin-bottom:.5rem}
+.dispatch-rule{height:3px;background:#B8860B;max-width:80px;margin-bottom:2rem}
+.blueprint-layout .bp-grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(126,200,227,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(126,200,227,.05) 1px,transparent 1px);background-size:40px 40px;pointer-events:none}
+.bp-rank{font-family:'Courier New',monospace;font-size:clamp(4rem,10vw,8rem);font-weight:400;color:rgba(126,200,227,.2);margin-bottom:1rem}
+.blueprint-layout .headline{font-family:'Courier New',monospace;font-weight:700;font-style:normal;font-size:clamp(1.8rem,4vw,3.5rem)}
+.broadsheet-num{font-family:var(--fraunces);font-size:clamp(6rem,16vw,14rem);font-weight:100;color:rgba(0,0,0,.06);line-height:.9;margin-bottom:-2rem}
+.broadsheet-rule{height:4px;background:#1A1A1A;width:100%;margin-bottom:2rem}
+.broadsheet-layout .headline{font-size:clamp(2rem,4vw,3.5rem);font-weight:900}
+.ticker-tape{background:#FFFF00;color:#FF3300;font-size:.8rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;padding:.6rem 0;white-space:nowrap;overflow:hidden;margin:0 -5vw 3rem;padding-left:5vw}
+.ticker-layout .headline{color:#FFFF00;font-size:clamp(2.5rem,6vw,5rem)}
+.ticker-layout .deck{color:rgba(255,255,255,.85)}
+.ticker-layout .flag-banner{background:#FFFF00;color:#FF3300}
+.magazine-footer{background:#050505;border-top:3px solid #C8A96E;padding:3rem 5vw;text-align:center;color:rgba(200,169,110,.5)}
+.magazine-footer p{font-family:var(--fraunces);font-style:italic;font-size:1rem;margin-bottom:.5rem}
+.magazine-footer small{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.spread{animation:fadeUp .6s ease-out both}
+.spread:nth-child(1){animation-delay:.05s}
+.spread:nth-child(2){animation-delay:.1s}
+.spread:nth-child(3){animation-delay:.15s}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div>
+    <div class="masthead-title">Morning<br><span>Edition</span></div>
+  </div>
+  <div class="masthead-meta">
+    <div class="masthead-date">Thursday, April 16, 2026</div>
+    <div class="masthead-tagline">Adult Beverage Intelligence for the Builder</div>
+    <div class="story-count">10 Curated Stories &middot; Brewbound &middot; Craft Beer &amp; Brewing &middot; BevNET</div>
+  </div>
+</header>
+<nav class="toc">
+  <div class="toc-label">Today&rsquo;s Stories</div>
+  <div class="toc-grid"><a class="toc-item" href="#story-1"><span class="toc-num">01</span><span class="toc-hed">Craft hits historic floor — buy now? <span class="toc-flag">&#x26A1;</span></span></a>
+<a class="toc-item" href="#story-2"><span class="toc-num">02</span><span class="toc-hed">Delta-9 sales up 148% — clock ticking <span class="toc-flag">&#x26A1;</span></span></a>
+<a class="toc-item" href="#story-3"><span class="toc-num">03</span><span class="toc-hed">White Claw giant swallows gin RTD</span></a>
+<a class="toc-item" href="#story-4"><span class="toc-num">04</span><span class="toc-hed">Boston Beer owes $175M for cans <span class="toc-flag">&#x26A1;</span></span></a>
+<a class="toc-item" href="#story-5"><span class="toc-num">05</span><span class="toc-hed">Still beer emerges as texture category <span class="toc-flag">&#x26A1;</span></span></a>
+<a class="toc-item" href="#story-6"><span class="toc-num">06</span><span class="toc-hed">New Belgium gains 3.2% Q1 volume</span></a>
+<a class="toc-item" href="#story-7"><span class="toc-num">07</span><span class="toc-hed">Craft survival strategy: run in packs <span class="toc-flag">&#x26A1;</span></span></a>
+<a class="toc-item" href="#story-8"><span class="toc-num">08</span><span class="toc-hed">NYC liquor stores may carry THC drinks</span></a>
+<a class="toc-item" href="#story-9"><span class="toc-num">09</span><span class="toc-hed">RTDs hit $13.6B — spirits lead charge</span></a>
+<a class="toc-item" href="#story-10"><span class="toc-num">10</span><span class="toc-hed">Beer prices spike hardest in March CPI <span class="toc-flag">&#x26A1;</span></span></a></div>
+</nav>
+<section class="spread" id="story-1" style="background:#0A0A0A;color:#F5F0E8;--accent:#C8A96E;"><div class="spread-inner hero-layout"><div class="hero-num">01</div><div class="content-zone"><div class="meta-row"><span class="source-tag">Brewers Association / Brewbound</span><span class="cat-tag" style="background:#C86E9E;color:#000">DATA</span></div><h2 class="headline">Craft hits historic floor — buy now?</h2><p class="deck">The BA's official 2025 numbers are brutal: production down 5.1% to 21.9M barrels, total brewery count fell to 9,578, and 481 shops closed last year alone — the worst non-pandemic decline on record. The silver lining is the BA's own economist calling 2026 a potential 'buying the dip' moment, with equipment prices soft and lease rates collapsing in over-built markets.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; This is the definitive macro number your investors, lenders, and distribution partners will cite in every conversation this quarter. Know it cold.</span></div><a class="read-link" href="https://www.brewbound.com/news/ba-economist-2026-could-be-a-buying-the-dip-moment-for-new-brewers" target="_blank">READ FULL STORY &rarr;</a><p class="orig-title">&ldquo;Brewers Association: Craft 2025 Production Volume -5.1%; 1,072 Brewery Closures in Last 2 Years&rdquo;</p></div></div></section>
+<section class="spread" id="story-2" style="background:#0D1117;color:#E8F4FD;--accent:#4FC3F7;"><div class="spread-inner midnight-layout"><div class="rank-pill">&numero; 02</div><div class="content-zone"><div class="meta-row"><span class="source-tag">BevNET Magazine (March-April 2026)</span><span class="cat-tag" style="background:#7EC87C;color:#000">CANNABIS</span></div><h2 class="headline">Delta-9 sales up 148% — clock ticking</h2><p class="deck">With Congress's November 12 ban deadline looming, delta-9 THC drink sales surged 148% YoY in the 52 weeks ending Feb 22 per SPINS — brands like Delta and Woodstock Goods are hitting the gas, expanding retail (Sprouts, Target) and doubling down on three-tier distribution partnerships rather than retreating. The smart money is hedging with hemp-free functional pivots in parallel.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; PCMKR's functional supplement positioning and three-tier distribution ambitions map directly onto the infrastructure these THC brands are building — and their November cliff could open shelf space and distributor bandwidth you can capture.</span></div><a class="read-link" href="https://www.bevnet.com/magazine/issue/2026/hemp-hopes-thc-drinks-prepare-for-uncertain-future-amid-regulatory-fight/" target="_blank">READ FULL STORY &rarr;</a></div><div class="watermark">02</div></div></section>
+<section class="spread" id="story-3" style="background:#FAFAFA;color:#1A1A1A;--accent:#E53935;"><div class="spread-inner alert-layout"><div class="alert-stamp">03</div><div class="content-zone"><div class="meta-row"><span class="source-tag dark">Brewbound</span><span class="cat-tag" style="background:#C8C86E;color:#fff">DEALS</span></div><h2 class="headline">White Claw giant swallows gin RTD</h2><p class="deck">Mark Anthony Brands — the force behind White Claw — announced a deal to acquire The Finnish Long Drink, the gin-based canned cocktail that carved out a cult following in the U.S. RTD set; the transaction is expected to close in coming weeks. This is a significant power consolidation move: MAB now controls a hard seltzer giant AND a spirits-based RTD with premium gin equity.</p><a class="read-link dark" href="https://www.brewbound.com/news/" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<section class="spread" id="story-4" style="background:#0C1A0C;color:#39FF14;--accent:#39FF14;"><div class="spread-inner terminal-layout"><div class="term-header">MORNING_EDITION://STORY_04 &gt; BEER &gt; BREWBOUND</div><div class="term-prompt">$ display --headline</div><h2 class="headline">Boston Beer owes $175M for cans</h2><div class="term-prompt">$ cat story.deck</div><p class="deck">A jury ruled in favor of Ardagh Metal Packaging USA against Boston Beer for allegedly failing to purchase contractual minimum volumes of aluminum cans from 2021–2025 — a $175.5 million hit filed in an SEC 8K. For small brewers, this is a loud warning: every volume-commitment clause in a can supply contract is a loaded gun.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; If you have or are negotiating any minimum-purchase clauses with can suppliers, packaging co-packers, or ingredient vendors, have your attorney review force-majeure and volume-flexibility language immediately.</span></div><div class="term-prompt">$ open <a class="read-link" href="https://www.brewbound.com/news/" target="_blank" style="color:#39FF14">https://www.brewbound.com/news/</a></div></div></section>
+<section class="spread" id="story-5" style="background:#F5F0E4;color:#2C1810;--accent:#8B2500;"><div class="spread-inner academic-layout"><div class="dropcap-num">5</div><div class="content-zone"><div class="meta-row"><span class="source-tag dark">Craft Beer & Brewing / Brewing Industry Guide</span><span class="cat-tag" style="background:#6E8EC8;color:#fff">SCIENCE</span></div><h2 class="headline">Still beer emerges as texture category</h2><p class="deck">CB&B's April feature digs into the rising wave of intentionally uncarbonated ales — including Jester King's lambic-inspired still ale ready in months — exploring how reduced carbonation reshapes mouthfeel, acidity perception, and pairing versatility. For brewers looking for differentiation on tap and in bottle, 'still' is quietly becoming a serious craft positioning.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; Still or low-carbonation fermented beverages are adjacent to PCMKR's digestive/functional positioning — the gut-friendly, lower-carbonate angle is a legitimate product extension worth prototyping.</span></div><div class="academic-rule"></div><a class="read-link dark" href="https://www.beerandbrewing.com" target="_blank">Source: Craft Beer & Brewing / Brewing Industry Guide &mdash; Read in full &rarr;</a></div></div></section>
+<section class="spread" id="story-6" style="background:#1A0533;color:#F8F0FF;--accent:#BF5FFF;"><div class="spread-inner bigstat-layout"><div class="stat-num">06</div><div class="content-zone"><div class="meta-row"><span class="source-tag">Brewbound</span><span class="cat-tag" style="background:#C86E9E;color:#000">DATA</span></div><h2 class="headline">New Belgium gains 3.2% Q1 volume</h2><p class="deck">Kirin-owned New Belgium (Voodoo Ranger, Fat Tire, Bell's Two Hearted, Oberon) grew volume 3.2% YTD through Q1 — making it the top share gainer in all of craft in a market where total craft volume is down 1.6%. CEO Shaun Belongie credits focused SKU discipline and strong distributor relationships as the engine.</p><a class="read-link" href="https://www.brewbound.com/news/" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<section class="spread" id="story-7" style="background:#F0EAD6;color:#1C1208;--accent:#B8860B;"><div class="spread-inner dispatch-layout"><div class="dispatch-num">07</div><div class="dispatch-rule"></div><div class="content-zone"><div class="meta-row"><span class="source-tag dark">BevNET Magazine (March-April 2026)</span><span class="cat-tag" style="background:#FF6B35;color:#fff">STARTUP</span></div><h2 class="headline">Craft survival strategy: run in packs</h2><p class="deck">BevNET's deep Q1 overview documents a fast-growing trend of craft breweries forming collectives and platforms to share production capacity, sales teams, and back-end efficiencies — from Frontier Beverage Collective (Coop Ale Works + Four Corners) to Abita's rebrand as Abita Beverage Group targeting 170K barrels. With major craft buyouts dead (Tilray's BrewDog deal the exception at a fraction of peak valuation), shared infrastructure is the new M&A.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; A beverage collective structure could let you share PCMKR's distribution and sales overhead with aligned brewery or functional-bev brands — lower burn, broader reach.</span></div><a class="read-link dark" href="https://www.bevnet.com/magazine/issue/2026/craft-beer-overview-breweries-continue-to-seek-strength-in-numbers/" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<section class="spread" id="story-8" style="background:#003153;color:#E8F4FD;--accent:#7EC8E3;"><div class="spread-inner blueprint-layout"><div class="bp-grid-overlay"></div><div class="bp-rank">[08]</div><div class="content-zone"><div class="meta-row"><span class="source-tag">BevNET.com</span><span class="cat-tag" style="background:#7EC87C;color:#000">CANNABIS</span></div><h2 class="headline">NYC liquor stores may carry THC drinks</h2><p class="deck">A newly introduced New York State Legislature measure would allow licensed alcohol retailers to sell THC-infused beverages — a massive retail unlock for hemp brands currently locked out of the state's largest urban market. If passed, New York would join Minnesota (where Target just expanded its THC set) as a major mainstream retail channel.</p><a class="read-link" href="https://www.bevnet.com/news/2026/nyc-liquor-stores-could-get-cannabis-drinks-under-new-bill" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<section class="spread" id="story-9" style="background:#FFFFF0;color:#1A1A1A;--accent:#333333;"><div class="spread-inner broadsheet-layout"><div class="broadsheet-num">09</div><div class="broadsheet-rule"></div><div class="content-zone"><div class="meta-row"><span class="source-tag dark">BevNET Magazine (March-April 2026)</span><span class="cat-tag" style="background:#6EC8B4;color:#fff">RTD</span></div><h2 class="headline">RTDs hit $13.6B — spirits lead charge</h2><p class="deck">NIQ data shows RTDs now represent 12.7% of total bev-alc off-premise dollar sales at $13.6B, with spirits-based RTDs up 25.7% in 2025 and offsetting roughly $650M in straight-spirits declines; the distribution shakeout (Gallo, Pernod, Brown-Forman fleeing RNDC for Reyes) is rewiring which brands get cold box access. Tequila-based and Latino-positioned RTDs are called out explicitly as the next growth vector for 2026.</p><a class="read-link dark" href="https://www.bevnet.com/magazine/issue/2026/beyond-the-industrys-bright-spot-whats-driving-rtds-in-2026/" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<section class="spread" id="story-10" style="background:#FF3300;color:#FFFFFF;--accent:#FFFF00;"><div class="spread-inner ticker-layout"><div class="ticker-tape">MORNING EDITION &#9733; STORY 10 &#9733; DATA &#9733; BREWBOUND &#9733; MORNING EDITION &#9733; STORY 10 &#9733; DATA &#9733; BREWBOUND &#9733; MORNING EDITION &#9733; STORY 10 &#9733; DATA &#9733; BREWBOUND &#9733; MORNING EDITION &#9733; STORY 10 &#9733; DATA &#9733; BREWBOUND &#9733; </div><div class="content-zone"><div class="meta-row"><span class="source-tag">Brewbound</span><span class="cat-tag" style="background:#C86E9E;color:#000">DATA</span></div><h2 class="headline">Beer prices spike hardest in March CPI</h2><p class="deck">Beer led all bev-alc categories in year-over-year price increases in the March BLS Consumer Price Index report — a double-edged signal: it may reflect cost pass-throughs from aluminum tariffs and ingredient inflation, but it also risks accelerating trade-down to RTDs and value spirits. Watch your price-pack architecture heading into summer selling season.</p><div class="flag-banner"><span class="flag-icon">&#x26A1;</span><span class="flag-text">RELEVANT TO YOU &mdash; If your brewery is absorbing input cost increases, the CPI data gives you air cover to raise prices — but cross-reference against your local comp set before moving.</span></div><a class="read-link" href="https://www.brewbound.com/news/" target="_blank">READ FULL STORY &rarr;</a></div></div></section>
+<footer class="magazine-footer">
+  <p>That&rsquo;s your Morning Edition.</p>
+  <small>Curated daily from Brewbound, Craft Beer &amp; Brewing, and BevNET &middot; Thursday, April 16, 2026</small>
+</footer>
+</body>
+</html>
