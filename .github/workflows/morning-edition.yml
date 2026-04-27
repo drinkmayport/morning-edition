@@ -2,7 +2,7 @@ name: Morning Edition
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # 7am Eastern = 12pm UTC
+    - cron: '0 11 * * 1'  # 7am Eastern = 12pm UTC
   workflow_dispatch:        # lets you run it manually too
 
 permissions:
